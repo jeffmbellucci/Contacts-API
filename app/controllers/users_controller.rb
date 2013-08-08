@@ -20,9 +20,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     @user.update_attributes(params[:attrs])
-
     redirect_to user_url(@user)
   end
 

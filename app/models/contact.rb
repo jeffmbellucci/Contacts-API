@@ -4,7 +4,4 @@ class Contact < ActiveRecord::Base
 
    belongs_to :user
    has_one :favorite
-   has_one :user_who_favors,
-           :through => :favorite,
-           :source => :user
-end
+ end

@@ -48,11 +48,21 @@ RestClient.get(url)
 #
 # RestClient.delete(url)
 
+# url = Addressable::URI.new(
+#   scheme: 'http',
+#   host: 'localhost',
+#   port: 3000,
+#   path: '/users/1'
+#   ).to_s
+#
+# RestClient.put(url, :attrs => {:username => 'Geoff', :email => 'geoff!'})
+
 url = Addressable::URI.new(
   scheme: 'http',
   host: 'localhost',
   port: 3000,
-  path: '/users/1'
+  path: '/users/2/contacts'
   ).to_s
 
-RestClient.put(url, :attrs => {:username => 'Geoff', :email => 'geoff!'})
+RestClient.post(url, :contact => {name: "dylan", address: "1061 market",
+              email: "dylan@d.com", phone_number: 444444444})
