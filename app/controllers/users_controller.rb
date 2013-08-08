@@ -21,12 +21,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:attrs])
-    redirect_to user_url(@user)
+    render :json => @user
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    render :text => "User #{params[:id]} deleted."
+    if @user.destroy
+      render :json => @user
+    else
+      render :json => @user.errors, status: :unprocessable_entity
+    end
   end
 end

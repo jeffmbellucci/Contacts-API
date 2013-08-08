@@ -11,9 +11,9 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = params[:contact]
-    contact[:user_id] = params[:user_id]
-    @contact = Contact.new(contact)
+    @contact = Contact.new(params[:contact])
+    @contact.user_id = params[:user_id]
+
     if @contact.save
       render :json => @contact
     else
@@ -24,12 +24,15 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     @contact.update_attributes(params[:attrs])
-    redirect_to user_contact_url(@contact)
+    render :json => @contact
   end
 
   def destroy
     @contact = Contact.find(params[:id])
-    @contact.destroy
-    render :text => "We destroyed contact #{params[:id]}!"
+    if @contact.destroy
+      render :json => @contact
+    else
+      render :json => @contact.errors, status: :unprocessable_entity
+    end
   end
 end
