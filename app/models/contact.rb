@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
    belongs_to :user
    has_one :favorite
 
-   def favorited_for_user_id(id)
+   def self.favorited_for_user_id(id)
      self.joins(:favorite).where("contacts.user_id = ?", id)
    end
  end
