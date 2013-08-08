@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_filter :authenticate
 
   def index
     @contacts = Contact.where("user_id = ?", params[:user_id])

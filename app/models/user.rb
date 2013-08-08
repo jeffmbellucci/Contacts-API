@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 
    has_many :contacts
 
-   private
-
    def self.log_in(username, password)
      self.find_by_username_and_password(username, User.hash_text(password))
    end

@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
     if user
       user.session_token = random_token
+      user.save
       render :json => user
     else
       render :text => "Forbidden", status: :forbidden
@@ -12,7 +13,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    user = User.find_by_session_token(params[:token])
     user.session_token = random_token
+    user
     nil
   end
 

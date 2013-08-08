@@ -9,10 +9,11 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def authenticate_user
-    return true if logged_in?
+  def authenticate
+    redirect_to home_path unless logged_in?
+  end
 
-    render :text => "Make a session at: #{root_path}/sessions. Enter your username and password as parameters"
-    false
+  def authorize(id)
+    current_user.id = id
   end
 end
